@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+h2 {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    color: #555;
+    gap: 4px;
+}
+
+form input,
+form textarea {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+button[type="submit"], .btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 20px;
+    background: #4a6cf7;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button[type="submit"]:hover, .btn:hover {
+    background: #3a5ce5;
+}
+
+.btn-logout {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+}
+
+.card p {
+    margin-bottom: 8px;
+}
+
+.error {
+    color: #e74c3c;
+    margin-bottom: 14px;
+    padding: 8px;
+    background: #fdecea;
+    border-radius: 4px;
+}
+
+.message {
+    color: #27ae60;
+    margin-bottom: 14px;
+    padding: 8px;
+    background: #eafaf1;
+    border-radius: 4px;
+}
+
+a {
+    color: #4a6cf7;
+}
