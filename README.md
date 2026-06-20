@@ -1,72 +1,72 @@
 # PHP Auth Project
 
-Учебный проект: система **аутентификации** пользователя на PHP + SQLite.
+A learning project: **user authentication** system built with PHP + SQLite.
 
-> **Аутентификация** — это проверка того, кто ты такой (логин + пароль).
-> **Авторизация** — это проверка того, что тебе разрешено делать (права доступа).
-> В этом проекте основной акцент на аутентификации.
+> **Authentication** — verifying who you are (login + password).
+> **Authorization** — verifying what you are allowed to do (access rights).
+> This project focuses primarily on authentication.
 
-## Что умеет приложение
+## Features
 
-- Вход в систему через данные из базы данных (не hard-coded)
-- Защита страниц — без входа доступ закрыт
-- Dashboard с информацией о пользователе
-- Редактирование профиля (имя, email, «О себе»)
-- Выход из системы с уничтожением сессии
+- User login via credentials stored in a database (not hard-coded)
+- Page protection — access denied without login
+- Dashboard with user information
+- Profile editing (name, email, bio)
+- Logout with session destruction
 
-## Технологии
+## Tech Stack
 
-- **PHP** — серверная логика
-- **SQLite** — база данных (хранится в одном файле)
-- **PDO** — подключение PHP к базе данных
-- **Сессии PHP** — отслеживание авторизованного пользователя
+- **PHP** — server-side logic
+- **SQLite** — database (stored in a single file)
+- **PDO** — PHP database connection layer
+- **PHP Sessions** — tracking the authenticated user
 
-## Структура проекта
+## Project Structure
 
 ```
-index.php          — страница входа (аутентификация)
-dashboard.php      — главная страница после входа
-profile.php        — редактирование профиля
-logout.php         — выход из системы
+index.php          — login page (authentication)
+dashboard.php      — main page after login
+profile.php        — profile editing
+logout.php         — logout
 config/
-  database.php     — подключение к SQLite через PDO
+  database.php     — SQLite connection via PDO
 database/
-  init.php         — создание таблицы и тестового пользователя
+  init.php         — table creation and test user seeding
 css/
-  style.css        — стили всех страниц
+  style.css        — styles for all pages
 ```
 
-## Запуск
+## Getting Started
 
-**1. Инициализировать базу данных:**
+**1. Initialize the database:**
 ```bash
 php database/init.php
 ```
 
-**2. Запустить встроенный сервер PHP:**
+**2. Start the built-in PHP server:**
 ```bash
 php -S localhost:8000
 ```
 
-**3. Открыть в браузере:**
+**3. Open in your browser:**
 ```
 http://localhost:8000
 ```
 
-## Тестовый пользователь
+## Test User
 
-| Поле | Значение |
-|------|----------|
-| Логин | `admin` |
-| Пароль | `secret123` |
+| Field    | Value       |
+|----------|-------------|
+| Login    | `admin`     |
+| Password | `secret123` |
 
-## Ключевые концепции проекта
+## Key Concepts
 
-| Концепция | Где используется |
-|-----------|------------------|
-| `password_hash()` / `password_verify()` | Безопасное хранение паролей |
-| Prepared statements (`?`) | Защита от SQL-инъекций |
-| `htmlspecialchars()` | Защита от XSS-атак |
-| `session_start()` / `$_SESSION` | Отслеживание вошедшего пользователя |
-| `CREATE TABLE IF NOT EXISTS` | Безопасная инициализация БД |
-| `INSERT OR IGNORE` | Повторный запуск init.php без ошибок |
+| Concept | Where Used |
+|---------|------------|
+| `password_hash()` / `password_verify()` | Secure password storage |
+| Prepared statements (`?`) | Protection against SQL injection |
+| `htmlspecialchars()` | Protection against XSS attacks |
+| `session_start()` / `$_SESSION` | Tracking the logged-in user |
+| `CREATE TABLE IF NOT EXISTS` | Safe database initialization |
+| `INSERT OR IGNORE` | Running init.php multiple times without errors |
