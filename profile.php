@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Защита страницы — если не вошёл, отправляем на логин
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit;
@@ -11,14 +12,17 @@ $pdo = getDB();
 
 $message = '';
 
+// Обрабатываем форму только когда она отправлена
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name  = trim($_POST['name'] ?? '');
+    $name  = trim($_POST['name']  ?? '');
     $email = trim($_POST['email'] ?? '');
-    $bio   = trim($_POST['bio'] ?? '');
+    $bio   = trim($_POST['bio']   ?? '');
 
     if ($name) {
         $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, bio = ? WHERE id = ?");
         $stmt->execute([$name, $email, $bio, $_SESSION['user_id']]);
+
+        // Обновляем имя в сессии чтобы оно сразу изменилось везде
         $_SESSION['user_name'] = $name;
         $message = 'Профиль обновлён.';
     } else {
@@ -26,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Получаем актуальные данные пользователя из базы
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
@@ -34,7 +39,6 @@ $user = $stmt->fetch();
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профиль</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -44,9 +48,11 @@ $user = $stmt->fetch();
             <h1>Редактирование профиля</h1>
             <a href="logout.php" class="btn-logout">Выйти</a>
         </div>
+
         <?php if ($message): ?>
             <p class="message"><?= htmlspecialchars($message) ?></p>
         <?php endif; ?>
+
         <form method="POST">
             <label>Имя
                 <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
@@ -59,6 +65,7 @@ $user = $stmt->fetch();
             </label>
             <button type="submit">Сохранить</button>
         </form>
+
         <a href="dashboard.php">← Назад на Dashboard</a>
     </div>
 </body>

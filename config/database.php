@@ -1,4 +1,5 @@
 <?php
+// Путь к файлу базы данных SQLite
 define('DB_PATH', __DIR__ . '/../database/users.db');
 
 function getDB(): PDO {
